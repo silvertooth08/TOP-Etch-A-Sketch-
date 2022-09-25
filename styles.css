@@ -1,0 +1,17 @@
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(var(--col-num), auto);
+
+    background-color: aquamarine;
+    padding: 20px;
+    height: 800px;
+    width: 800px;
+    
+}
+
+.container > div {
+    background-color: burlywood;
+    height: auto;
+    width: 50px;
+}

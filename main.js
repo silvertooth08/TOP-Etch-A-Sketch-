@@ -1,18 +1,22 @@
 "use strict";
-const body = document.querySelector('body')
-const containerDiv = document.createElement('div')
-containerDiv.classList.add('container')
-body.appendChild(containerDiv)
+function createGrid(gridSize) {
+    const body = document.querySelector('body')
+    const containerDiv = document.createElement('div');
+    containerDiv.style.setProperty('--col-num', gridSize);
+    containerDiv.classList.add('container');
+    body.appendChild(containerDiv);
 
 
-function createDivs(x,y) {
-    for (let i = 0; i < x; i++) {
-        for (let j = 0; j < y; j++) {
+
+    for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
             const divs = document.createElement('div')
            containerDiv.appendChild(divs)
         }
     }
-
+    return containerDiv;
 }
 
-createDivs(16,16);
+
+const containerDiv = createGrid(16);
+
