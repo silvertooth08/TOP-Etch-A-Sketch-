@@ -34,7 +34,7 @@ gridSizeRange.setAttribute('type','range');
 gridSizeRange.max = 100;
 gridSizeRange.min = 1;
 gridSizeRange.defaultValue = 16;
-gridSizeRange.onchange = "updateTextInput(this.value);"
+gridSizeRange.addEventListener('input',updateGridInput)
 gridSizeRange.innerText = gridSizeRange.value;
 rangeContainer.appendChild(gridSizeRange);
 
@@ -46,25 +46,34 @@ rangeContainer.appendChild(gridDisplay)
 
 function updateGridInput(val) {
     let output = document.getElementById('gridDisplay');
-    output.innerText = val;
+  return  output.innerText = gridSizeRange.value;
   }
 
 const colorButton = document.createElement('button');
 colorButton.innerText = 'Color Picker';
 buttonContainer.appendChild(colorButton);
 
+// Color picking function 
+
 
 const rainbowButton = document.createElement('button');
 rainbowButton.innerText = 'Rainbow Effect';
 buttonContainer.appendChild(rainbowButton);
 
+// Random Color picking function with %10 contrast added every pass on the same div
+
 const eraserButton = document.createElement('button');
 eraserButton.innerText = 'Eraser';
 buttonContainer.appendChild(eraserButton);
+
+// Erasing divs button (making them the initial background color,e.g. White)
+
+
 
 const clearButton = document.createElement('button');
 clearButton.innerText = 'Clear';
 buttonContainer.appendChild(clearButton);
 
-let gridSize ;
+// Clearing all divs button (making them the initial background color,e.g. White)
+
 
