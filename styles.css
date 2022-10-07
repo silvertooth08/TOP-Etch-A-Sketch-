@@ -5,17 +5,15 @@ body {
 }
 .container {
     display: grid;
-    grid-template-columns: repeat(var(--col-num), auto);
-
+    grid-template-columns: repeat(var(--col-num), auto);    
     background-color: rgb(75, 55, 25);
     padding: 2px;
     height: 800px;
     width: 800px;
-    
 }
 
 .container > div {
-    background-color:whitesmoke;
+    background-color:white;
     height: auto;
     width: auto;
 }
@@ -33,4 +31,14 @@ border:none;
 
 .button-container > button:hover {
     background-color: greenyellow;
+}
+
+div.button-container > input[type=color] {
+    order: -1;
+    align-self: center;
+    height: 50px;
+    border: none;
+}
+div.button-container > input[type=color]::-webkit-color-swatch {
+    border-radius: 50%;
 }
