@@ -97,9 +97,13 @@ buttonContainer.appendChild(rainbowButton);
 // Random Color picking function with %10 contrast added every pass on the same div
 
 function pickRandomColor() {
-   pickedColor =`hsl(${Math.random()*360},100%,50%)` 
-    return pickedColor;
+    pickedColor = `hsl(${Math.random()*360},100%,50%)`
+    let containerDiv = document.querySelector('.container')
+    let divs = containerDiv.querySelectorAll('div');
+     divs.forEach((div)=> {div.addEventListener('mouseenter',pickRandomColor) 
+     });
 }
+
 
 const eraserButton = document.createElement('button');
 eraserButton.innerText = 'Eraser';
