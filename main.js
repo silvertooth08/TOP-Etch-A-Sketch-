@@ -5,18 +5,20 @@ containerDiv.classList.add('container');
 const body = document.querySelector('body')
 document.body.appendChild(containerDiv);
 
+
 function createGrid(gridSize) {
     containerDiv.style.setProperty('--col-num', gridSize);
-
-
-
     for (let i = 0; i < gridSize; i++) {
         for (let j = 0; j < gridSize; j++) {
             const divs = document.createElement('div');
-            divs.classList.add('grid-tile');
             containerDiv.appendChild(divs);
+            
+            divs.addEventListener('mousemove', ()=> {
+            return   divs.style.backgroundColor = pickedColor;
+            })
         }
     }
+    
     return containerDiv;
 }
 
@@ -71,7 +73,7 @@ buttonContainer.appendChild(colorButton);
 let colorInput = document.createElement("input");
 colorInput.setAttribute("type", "color");
 colorInput.setAttribute('id','colorInput');
-colorInput.addEventListener('change',setColor)
+colorInput.addEventListener('input',setColor)
 
 // Color palette reveal function 
 function showColorPalette() {
@@ -86,23 +88,6 @@ let colorInput = document.querySelector('#colorInput')
 return pickedColor = colorInput.value;
 }
 
-let isMouseDown = false;
-
-containerDiv.addEventListener('mousedown', function (e) {
-  isMouseDown = true;
-})
-
-containerDiv.addEventListener('mouseup', function (e) {
-  isMouseDown = false;
-})
-
-containerDiv.addEventListener('mousemove', function (e) {
-  if(e.classList.contains('.grid-tile') && isMouseDown){
-    e.style.backgroundColor = pickedColor;
-  }
-})
-
-
 
 const rainbowButton = document.createElement('button');
 rainbowButton.innerText = 'Rainbow Effect';
@@ -112,10 +97,7 @@ buttonContainer.appendChild(rainbowButton);
 // Random Color picking function with %10 contrast added every pass on the same div
 
 function pickRandomColor() {
-    let h = Math.floor(Math.random()*360);
-    let s = Math.floor(Math.random()*101);
-    let l = Math.floor(Math.random()*101);
-
+   pickedColor =`hsl(${Math.random()*360},100%,50%)` 
     return pickedColor;
 }
 
@@ -127,7 +109,7 @@ buttonContainer.appendChild(eraserButton);
 // Erasing divs button (making them the initial background color,e.g. White)
 
 function eraseSketch() {
-   return pickedColor = white;
+   return pickedColor = 'white';
 }
 
 
@@ -140,8 +122,9 @@ buttonContainer.appendChild(clearButton);
 // Clearing all divs button (making them the initial background color,e.g. White)
 
 function clearSketch() {
-    containerDiv.getElementsByTagName('div').style.setProperty('background', 'white');
+    let containerDiv = document.querySelector('.container')
+   let divs = containerDiv.querySelectorAll('div');
+    divs.forEach((div)=> {div.style.backgroundColor = 'white'; 
+    });
 }
-
-
 
