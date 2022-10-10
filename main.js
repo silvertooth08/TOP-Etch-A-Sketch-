@@ -12,13 +12,13 @@ function createGrid(gridSize) {
         for (let j = 0; j < gridSize; j++) {
             const divs = document.createElement('div');
             containerDiv.appendChild(divs);
-            
-            divs.addEventListener('mousemove', ()=> {
-            return   divs.style.backgroundColor = pickedColor;
+            divs.classList.add('grid-tile');
+            divs.addEventListener('mousemove', () => {
+                return divs.style.backgroundColor = pickedColor;
             })
         }
     }
-    
+
     return containerDiv;
 }
 
@@ -72,20 +72,31 @@ buttonContainer.appendChild(colorButton);
 
 let colorInput = document.createElement("input");
 colorInput.setAttribute("type", "color");
-colorInput.setAttribute('id','colorInput');
-colorInput.addEventListener('input',setColor)
+colorInput.setAttribute('id', 'colorInput');
+colorInput.addEventListener('input', setColor)
 
 // Color palette reveal function 
 function showColorPalette() {
+    let containerDiv = document.querySelector('.container')
+    let divs = containerDiv.querySelectorAll('div');
+    divs.forEach((div) => {
+        div.removeEventListener('mouseover', pickRandomColor)
+    })
     buttonContainer.appendChild(colorInput);
-    colorButton.removeEventListener('click',showColorPalette) 
+    colorButton.removeEventListener('click', showColorPalette)
+    colorButton.addEventListener('click', setColor);
+    pickedColor = colorInput.value;
 };
-
 //color picking function
 let pickedColor;
-function setColor (){
-let colorInput = document.querySelector('#colorInput')
-return pickedColor = colorInput.value;
+function setColor() {
+    let containerDiv = document.querySelector('.container')
+    let divs = containerDiv.querySelectorAll('div');
+    divs.forEach((div) => {
+        div.removeEventListener('mouseover', pickRandomColor)
+    })
+    let colorInput = document.querySelector('#colorInput')
+    pickedColor = colorInput.value;
 }
 
 
@@ -96,13 +107,37 @@ buttonContainer.appendChild(rainbowButton);
 
 // Random Color picking function with %10 contrast added every pass on the same div
 
+// let isMouseDown = false;
+
+// window.addEventListener('mousedown', function (e) {
+//     isMouseDown = true;
+// });
+
+// window.addEventListener('mouseup', function (e) {
+//     isMouseDown = false;
+// });
+
+// window.addEventListener('mousemove', function (e) {
+//     let containerDiv = document.querySelector('.container')
+//     let divs = containerDiv.querySelectorAll('div');
+//     divs.forEach((div) => {
+//         let confirmation = (div.classList.contains('grid-tile'))
+//         if (confirmation && isMouseDown) {
+//             pickedColor = colorInput;
+//         }
+//     })
+
+// });
+
 function pickRandomColor() {
-    pickedColor = `hsl(${Math.random()*360},100%,50%)`
     let containerDiv = document.querySelector('.container')
     let divs = containerDiv.querySelectorAll('div');
-     divs.forEach((div)=> {div.addEventListener('mouseenter',pickRandomColor) 
-     });
-}
+    pickedColor = `hsl(${Math.random() * 360},100%,50%)`;
+    divs.forEach((div) => {
+        div.addEventListener('mouseover', pickRandomColor)
+    })
+};
+
 
 
 const eraserButton = document.createElement('button');
@@ -113,7 +148,12 @@ buttonContainer.appendChild(eraserButton);
 // Erasing divs button (making them the initial background color,e.g. White)
 
 function eraseSketch() {
-   return pickedColor = 'white';
+    pickedColor = 'white';
+    let containerDiv = document.querySelector('.container')
+    let divs = containerDiv.querySelectorAll('div');
+    divs.forEach((div) => {
+        div.removeEventListener('mouseover', pickRandomColor)
+    })
 }
 
 
@@ -127,8 +167,13 @@ buttonContainer.appendChild(clearButton);
 
 function clearSketch() {
     let containerDiv = document.querySelector('.container')
-   let divs = containerDiv.querySelectorAll('div');
-    divs.forEach((div)=> {div.style.backgroundColor = 'white'; 
+    let divs = containerDiv.querySelectorAll('div');
+    divs.forEach((div) => {
+        div.style.backgroundColor = 'white';
+    });
+
+    divs.forEach((div) => {
+        div.removeEventListener('mouseover', pickRandomColor)
     });
 }
 
