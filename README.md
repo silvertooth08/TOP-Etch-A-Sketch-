@@ -7,3 +7,5 @@ In this project a lot had been learned about handling the events and adding and 
 Also the logic of toggling some if checkers was desperately needed as without them the repetitive coding is inevitable.
 
 While creating the grid and adding the event listeners For loops were benefitted greatly.
+
+Shade bonus couldn't be achieved but too much time spent on this project

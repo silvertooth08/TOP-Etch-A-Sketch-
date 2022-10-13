@@ -105,29 +105,9 @@ rainbowButton.innerText = 'Rainbow Effect';
 rainbowButton.addEventListener('click', pickRandomColor);
 buttonContainer.appendChild(rainbowButton);
 
+
 // Random Color picking function with %10 contrast added every pass on the same div
 
-// let isMouseDown = false;
-
-// window.addEventListener('mousedown', function (e) {
-//     isMouseDown = true;
-// });
-
-// window.addEventListener('mouseup', function (e) {
-//     isMouseDown = false;
-// });
-
-// window.addEventListener('mousemove', function (e) {
-//     let containerDiv = document.querySelector('.container')
-//     let divs = containerDiv.querySelectorAll('div');
-//     divs.forEach((div) => {
-//         let confirmation = (div.classList.contains('grid-tile'))
-//         if (confirmation && isMouseDown) {
-//             pickedColor = colorInput;
-//         }
-//     })
-
-// });
 
 function pickRandomColor() {
     let containerDiv = document.querySelector('.container')
@@ -169,11 +149,12 @@ function clearSketch() {
     let containerDiv = document.querySelector('.container')
     let divs = containerDiv.querySelectorAll('div');
     divs.forEach((div) => {
-        div.style.backgroundColor = 'white';
-    });
-
-    divs.forEach((div) => {
         div.removeEventListener('mouseover', pickRandomColor)
     });
+    divs.forEach((div) => {
+        div.style.backgroundColor = 'white';
+    });
+    pickedColor = 'white'
 }
+
 
