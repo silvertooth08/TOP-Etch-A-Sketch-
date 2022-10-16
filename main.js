@@ -4,6 +4,15 @@ const containerDiv = document.createElement('div');
 containerDiv.classList.add('container');
 const body = document.querySelector('body')
 document.body.appendChild(containerDiv);
+let isMouseDown = false;
+
+window.addEventListener('mousedown', function (e) {
+  isMouseDown = true;
+})
+
+window.addEventListener('mouseup', function (e) {
+  isMouseDown = false;
+})
 
 
 function createGrid(gridSize) {
@@ -13,8 +22,9 @@ function createGrid(gridSize) {
             const divs = document.createElement('div');
             containerDiv.appendChild(divs);
             divs.classList.add('grid-tile');
-            divs.addEventListener('mousemove', () => {
-                return divs.style.backgroundColor = pickedColor;
+            
+            divs.addEventListener('mouseover', () => {
+                if ('mouseover' && isMouseDown) return divs.style.backgroundColor = pickedColor;
             })
         }
     }
